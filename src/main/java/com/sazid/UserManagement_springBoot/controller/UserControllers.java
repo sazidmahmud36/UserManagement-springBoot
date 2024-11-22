@@ -1,5 +1,6 @@
 package com.sazid.UserManagement_springBoot.controller;
 
+import com.sazid.UserManagement_springBoot.dto.UserDto;
 import com.sazid.UserManagement_springBoot.entity.User;
 import com.sazid.UserManagement_springBoot.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,8 @@ public class UserControllers {
     private UserServiceImpl userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User saveUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+        UserDto saveUser = userService.createUser(userDto);
 
         return new ResponseEntity<>(saveUser, HttpStatus.CREATED);
     }

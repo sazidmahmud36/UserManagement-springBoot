@@ -1,5 +1,6 @@
 package com.sazid.UserManagement_springBoot.impl;
 
+import com.sazid.UserManagement_springBoot.dto.UserDto;
 import com.sazid.UserManagement_springBoot.entity.User;
 import com.sazid.UserManagement_springBoot.repo.UserRepo;
 import com.sazid.UserManagement_springBoot.service.UserService;
@@ -18,8 +19,28 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
 
     @Override
-    public User createUser(User user) {
-        return userRepo.save(user);
+    public UserDto createUser(UserDto userDto) {
+        //Convert UserDto to user Entity
+        User user = new User(
+                userDto.getId(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getEmail()
+        );
+
+        User saveUser = userRepo.save(user);
+
+        //Convert User to UserDto
+
+        UserDto saveUserDto = new UserDto(
+                saveUser.getId(),
+                saveUser.getFirstName(),
+                saveUser.getLastName(),
+                saveUser.getEmail()
+        );
+        return saveUserDto;
+
+
     }
 
     @Override
